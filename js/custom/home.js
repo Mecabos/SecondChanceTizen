@@ -14,41 +14,54 @@ $(document).ready(function () {
 
     function nextProfilePicture(){
         pictureIndex++;
-        if(pictureIndex >= pictureArray.length-1){
+        if(pictureIndex >= filteredProfilesArray[profileIndex].pictureList.length-1){
             rightArrow.attr('disabled', true);
+            leftArrow.attr('disabled', false);
         }
         else if (pictureIndex > 0){
             leftArrow.attr('disabled', false);
         }
-        profilePicture.attr("src", pictureArray[pictureIndex]) ;
+        profilePicture.attr("src", serverURL+filteredProfilesArray[profileIndex].pictureList[pictureIndex]) ;
     }
 
     function previousProfilePicture(){
         pictureIndex--;
         if(pictureIndex <= 0){
             leftArrow.attr('disabled', true);
+            rightArrow.attr('disabled', false);
         }
         else if (pictureIndex > 0){
             rightArrow.attr('disabled', false);
         }
-        profilePicture.attr("src", pictureArray[pictureIndex]) ;
+        profilePicture.attr("src",serverURL+filteredProfilesArray[profileIndex].pictureList[pictureIndex]) ;
     }
 
     function populateProfiles(profiles) {
         if (profiles.length > 0){
             $.each(profiles, function (index, value) {
-                currentProfile = {
-                    id : value.id,
-                    name : value.name,
-                    age : value.age
-                };
-                filteredProfilesArray.push(currentProfile);
+                getPictureListAPI(value.id,function (pictureList) {
+                    currentProfilePictureList = [value.profilePicture.link];
+                    $.each(pictureList, function (index2, picture) {
+                        currentProfilePictureList.push(picture.link)
+                    });
+                    currentProfile = {
+                        id : value.id,
+                        name : value.name,
+                        age : value.age,
+                        pictureList : currentProfilePictureList
+                    };
+                    filteredProfilesArray.push(currentProfile);
+                    if (index+1 === profiles.length){
+                        setFilteredProfile(0);
+                        neutralIcon.on("click", function(){saveNotation(userData.id, filteredProfilesArray[profileIndex].id, 0)});
+                        likeIcon.on("click", function(){saveNotation(userData.id, filteredProfilesArray[profileIndex].id, 1)});
+                        loveIcon.on("click", function(){saveNotation(userData.id, filteredProfilesArray[profileIndex].id, 2)});
+                    }
+                });
             });
-            setFilteredProfile(0);
         }else{
             setFilteredProfile(-1);
         }
-
     }
 
     function setFilteredProfile (index){
@@ -56,7 +69,11 @@ $(document).ready(function () {
         if (index !== -1){
             profileName.html(filteredProfilesArray[index].name);
             profileAge.html(filteredProfilesArray[index].age);
-            profilePicture.attr("src", pictureArray[index]) ;
+            profilePicture.attr("src", serverURL+filteredProfilesArray[profileIndex].pictureList[pictureIndex]) ;
+            if (filteredProfilesArray[profileIndex].pictureList.length > 1){
+                leftArrow.attr('disabled', true);
+                rightArrow.attr('disabled', false);
+            }
         }else{
             profileName.html("No more persons available with the specified filters");
             profileAge.html("Please try again later");
@@ -79,7 +96,7 @@ $(document).ready(function () {
             },
             value : value
         };
-        saveNewNotation(newNotationData,function(){
+        saveNewNotationAPI(newNotationData,function(){
             profileIndex++;
             if (profileIndex <= filteredProfilesArray.length-1){
                 setFilteredProfile(profileIndex);
@@ -91,7 +108,6 @@ $(document).ready(function () {
     }
 
     leftArrow.attr('disabled', true);
-    pictureArray = ["images/person1.PNG","images/person2.PNG","images/person3.jpg"];
     //TODO:CHANGE TO DYNAMIC
     userData = {
         id : 5
@@ -99,9 +115,6 @@ $(document).ready(function () {
 
     rightArrow.on("click", nextProfilePicture);
     leftArrow.on("click", previousProfilePicture);
-    neutralIcon.on("click", function(){saveNotation(userData.id, filteredProfilesArray[profileIndex].id, 0)});
-    likeIcon.on("click", function(){saveNotation(userData.id, filteredProfilesArray[profileIndex].id, 1)});
-    loveIcon.on("click", function(){saveNotation(userData.id, filteredProfilesArray[profileIndex].id, 2)});
 
     getFilteredUsersAPI(userData,populateProfiles);
 });

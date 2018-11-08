@@ -1,7 +1,8 @@
 /*---------------------------------URLS---------------------------------*/
-var serverURL = 'http://localhost:8080/user';
-var getFilteredUsersURL = serverURL + '/notation/getFilteredUsers';
-var saveNewNotationURL = serverURL + '/notation/saveNewNotation';
+var serverURL = 'http://localhost:8080';
+var getFilteredUsersURL = serverURL + '/user/notation/getFilteredUsers';
+var saveNewNotationURL = serverURL + '/user/notation/saveNewNotation';
+var getPictureListURL = serverURL + '/user/picture/getPictureList/';
 
 /*---------------------------------REST Services---------------------------------*/
 /*---NOTATION---*/
@@ -21,7 +22,7 @@ function getFilteredUsersAPI(userData,callback){
     });
 }
 
-function saveNewNotation(newNotationData, callback){
+function saveNewNotationAPI(newNotationData, callback){
     $.ajax({
         type: 'POST',
         url: saveNewNotationURL,
@@ -32,8 +33,22 @@ function saveNewNotation(newNotationData, callback){
             callback(response);
         },
         error : function (xhr, ajaxOptions, thrownError){
-            alert(xhr.status);
-            alert(thrownError);
+
+        }
+    });
+}
+
+function getPictureListAPI(userId, callback){
+    $.ajax({
+        type: 'POST',
+        url: getPictureListURL+userId,
+        contentType: "application/json",
+        datatype: "application/json",
+        success: function (response) {
+            callback(response);
+        },
+        error : function (xhr, ajaxOptions, thrownError){
+
         }
     });
 }
