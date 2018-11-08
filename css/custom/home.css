@@ -1,0 +1,63 @@
+.page_content {
+    text-align: center;
+}
+
+#profile_picture_container{
+    position:relative;
+}
+
+#left_arrow {
+    position:absolute;
+    bottom: 50%;
+    left:2%;
+    opacity: 0.7;
+}
+
+#right_arrow {
+    position:absolute;
+    bottom:50%;
+    right:2%;
+    opacity: 0.7;
+}
+
+.profile_picture{
+    height: 350px;
+    width: 100%;
+    object-fit: fill;
+}
+
+#profile_info {
+    display: grid;
+    height: 100%;
+    width: 100%;
+    background-image: url(../../images/background_gradient_blue.png);
+}
+
+.profile_info{
+    margin-top: 10px;
+    font-family: Agency FB;
+    font-size: x-large;
+    text-align: center;
+}
+
+.rate_icon_holder{
+    margin-top: 20px;
+    text-align: justify;
+    -ms-text-justify: distribute-all-lines;
+    text-justify: distribute-all-lines;
+    width: 80%;
+    display: inline-block;
+    font-size: 0;
+    line-height: 0
+}
+
+.rate_icon_image{
+    transform:scale(1.3,1.3);
+}
+
+.stretch {
+    width: 100%;
+    display: inline-block;
+    font-size: 0;
+    line-height: 0
+}
