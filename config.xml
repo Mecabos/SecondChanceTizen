@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets" id="http://yourdomain/SecondChance" version="1.0.0" viewmodes="maximized">
-    <access origin="http://localhost:8080" subdomains="true"/>
+    <access origin="http://192.168.1.2:8080" subdomains="true"/>
     <tizen:application id="Kd0hbCchNC.SecondChance" package="Kd0hbCchNC" required_version="2.4"/>
     <content src="home.html"/>
     <feature name="http://tizen.org/feature/screen.size.all"/>
-    <icon src="icon.png"/>
+    <icon src="Logo.png"/>
     <name>SecondChance</name>
     <tizen:profile name="mobile"/>
 </widget>
