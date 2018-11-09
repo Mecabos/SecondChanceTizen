@@ -9,6 +9,7 @@ var markMessageListAsSeenURL = serverURL + '/user/message/markMessageListAsSeen'
 var saveNewMessageURL = serverURL + '/user/message/saveNewMessage';
 var getUserURL = serverURL + '/user/appUser/getUser';
 var deleteLikeMatchURL = serverURL + '/user/likeMatch/delete';
+var banLikeMatchURL = serverURL + '/user/likeMatch/ban';
 
 /*---------------------------------REST Services---------------------------------*/
 /*---NOTATION---*/
@@ -106,6 +107,21 @@ function deleteLikeMatchAPI(likeMatchData, callback){
     });
 }
 
+function banLikeMatchAPI(likeMatchData, callback){
+    $.ajax({
+        type: 'POST',
+        url: banLikeMatchURL,
+        contentType: "application/json",
+        datatype: "application/json",
+        data: JSON.stringify(likeMatchData),
+        success: function (response) {
+            callback(response);
+        },
+        error : function (xhr, ajaxOptions, thrownError){
+
+        }
+    });
+}
 /*---CHAT---*/
 function getMessageListAPI(messageData, callback){
     $.ajax({

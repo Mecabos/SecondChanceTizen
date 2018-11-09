@@ -69,7 +69,7 @@ $(document).ready(function () {
                         }
                     );
                 } else {
-                    txt = "You pressed Cancel!";
+
                 }
 
             });
@@ -77,7 +77,24 @@ $(document).ready(function () {
             $(".report_user").on("click",function(e){
                 e.preventDefault();
                 e.stopPropagation();
-                alert("report user " + $(this).data("target"));
+                if (confirm("Are you sure you want to Report this person ?!")) {
+                    banLikeMatchAPI(
+                        {
+                            sourceUser : {
+                                id : localStorage['loggedUserID']
+                            },
+                            targetUser : {
+                                id : $(this).data("target")
+                            }
+                        },function(){
+
+                            alert("Person Reported we're sorry for the inconvenience !");
+                            window.location = "home.html";
+                        }
+                    );
+                } else {
+
+                }
             });
 
         }

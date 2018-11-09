@@ -114,7 +114,7 @@ $(document).ready(function () {
     leftArrow.attr('disabled', true);
 
     //TODO:CHANGE TO DYNAMIC
-    localStorage['loggedUserID'] = 1;
+    localStorage['loggedUserID'] = 3;
     loggedUserData = {
         id : localStorage['loggedUserID']
     };
