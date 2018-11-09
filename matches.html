@@ -15,6 +15,9 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/ionicons.min.css" />
     <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <link href="css/emoji.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/custom/matches.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
     <!--Google Font-->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
@@ -48,8 +51,8 @@
 
               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right main-menu">
-                  <li class="dropdown"><a href="index.html">Home</a></li>
-                  <li class="dropdown"><a href="contact.html">Contact</a></li>
+                  <li class="dropdown"><a href="home.html">Home</a></li>
+                  <li class="dropdown"><a href="matches.html">Matches</a></li>
                 </ul>
               </div>
             </div>
@@ -59,12 +62,13 @@
     <!-- Content
         ================================================= -->
     <div id="main" class="page">
-        <div class="contents">
-
+        <div class="chat-room">
+            <div class="">
+                <ul class="nav nav-tabs contact-list scrollbar-wrapper scrollbar-outer" id="match_list">
+                </ul>
+            </div>
         </div>
     </div>
-
-
     <!-- Footer
             ================================================= -->
     <footer id="footer" style="position: fixed; bottom: 0; width: 100%">
@@ -77,11 +81,13 @@
         ================================================= -->
     <script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.appear.min.js"></script>
-    <script src="js/jquery.incremental-counter.js"></script>
+    <script src="js/jquery.sticky-kit.min.js"></script>
+    <script src="js/jquery.scrollbar.min.js"></script>
     <script src="js/script.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/config.js"></script>
     <script src="js/custom/rest_api.js"></script>
+    <script src="js/custom/matches.js"></script>
 </body>
 
 </html>

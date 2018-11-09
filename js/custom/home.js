@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    /*----PROFILE PICTURE SLIDER----*/
     filteredProfilesArray = [];
     pictureIndex = 0;
     profileIndex = 0;
@@ -53,9 +52,9 @@ $(document).ready(function () {
                     filteredProfilesArray.push(currentProfile);
                     if (index+1 === profiles.length){
                         setFilteredProfile(0);
-                        neutralIcon.on("click", function(){saveNotation(userData.id, filteredProfilesArray[profileIndex].id, 0)});
-                        likeIcon.on("click", function(){saveNotation(userData.id, filteredProfilesArray[profileIndex].id, 1)});
-                        loveIcon.on("click", function(){saveNotation(userData.id, filteredProfilesArray[profileIndex].id, 2)});
+                        neutralIcon.on("click", function(){saveNotation(loggedUserData.id, filteredProfilesArray[profileIndex].id, 0)});
+                        likeIcon.on("click", function(){saveNotation(loggedUserData.id, filteredProfilesArray[profileIndex].id, 1)});
+                        loveIcon.on("click", function(){saveNotation(loggedUserData.id, filteredProfilesArray[profileIndex].id, 2)});
                     }
                 });
             });
@@ -107,14 +106,21 @@ $(document).ready(function () {
         });
     }
 
+    function setLoggedUserData(user){
+        localStorage['loggedUserName'] = user.name;
+        localStorage['loggedUserProfilePictureLink'] = serverURL+user.profilePicture.link;
+    }
+
     leftArrow.attr('disabled', true);
+
     //TODO:CHANGE TO DYNAMIC
-    userData = {
-        id : 5
+    localStorage['loggedUserID'] = 1;
+    loggedUserData = {
+        id : localStorage['loggedUserID']
     };
 
     rightArrow.on("click", nextProfilePicture);
     leftArrow.on("click", previousProfilePicture);
-
-    getFilteredUsersAPI(userData,populateProfiles);
+    getFilteredUsersAPI(loggedUserData,populateProfiles);
+    getUserAPI(loggedUserData,setLoggedUserData);
 });
